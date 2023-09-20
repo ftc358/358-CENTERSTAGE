@@ -88,7 +88,7 @@ public class lastyearauto extends Driving358 {
     public void runOpMode() {
         // The TFObjectDetector uses the camera frames from the VuforiaLocalizer, so we create that
         // first.
-        initVuforia();
+        //initVuforia();
         initTfod();
         hardware358.init();
 
@@ -197,18 +197,18 @@ public class lastyearauto extends Driving358 {
     /**
      * Initialize the Vuforia localization engine.
      */
-    private void initVuforia() {
-        /*
-         * Configure Vuforia by creating a Parameter object, and passing it to the Vuforia engine.
-         */
-        VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
-
-        parameters.vuforiaLicenseKey = VUFORIA_KEY;
-        parameters.cameraName = hardwareMap.get(WebcamName.class, "Webcam 1");
-
-        //  Instantiate the Vuforia engine
-        vuforia = ClassFactory.getInstance().createVuforia(parameters);
-    }
+//    private void initVuforia() {
+//        /*
+//         * Configure Vuforia by creating a Parameter object, and passing it to the Vuforia engine.
+//         */
+//        VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
+//
+//        parameters.vuforiaLicenseKey = VUFORIA_KEY;
+//        parameters.cameraName = hardwareMap.get(WebcamName.class, "Webcam 1");
+//
+//        //  Instantiate the Vuforia engine
+//        vuforia = ClassFactory.getInstance().createVuforia(parameters);
+//    }
 
     /**
      * Initialize the TensorFlow Object Detection engine.
