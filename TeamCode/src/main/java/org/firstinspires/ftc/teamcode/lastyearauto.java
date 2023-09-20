@@ -34,12 +34,13 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
-
+import org.firstinspires.ftc.robotcore.external.tfod.TfodParameters;
 import java.util.List;
 
 /**
@@ -105,7 +106,8 @@ public class lastyearauto extends Driving358 {
             // to artificially zoom in to the center of image.  For best results, the "aspectRatio" argument
             // should be set to the value of the images used to create the TensorFlow Object Detection model
             // (typically 16/9).
-            tfod.setZoom(1.0, 16.0 / 9.0);
+
+            tfod.setZoom(1.0);
         }
 
         /** Wait for the game to begin */
@@ -213,18 +215,27 @@ public class lastyearauto extends Driving358 {
     /**
      * Initialize the TensorFlow Object Detection engine.
      */
-    private void initTfod() {
-        int tfodMonitorViewId = hardwareMap.appContext.getResources().getIdentifier(
-                "tfodMonitorViewId", "id", hardwareMap.appContext.getPackageName());
-        TFObjectDetector.Parameters tfodParameters = new TFObjectDetector.Parameters(tfodMonitorViewId);
-        tfodParameters.minResultConfidence = 0.75f;
-        tfodParameters.isModelTensorFlow2 = true;
-        tfodParameters.inputSize = 300;
-        tfod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
 
-        // Use loadModelFromAsset() if the TF Model is built in as an asset by Android Studio
-        // Use loadModelFromFile() if you have downloaded a custom team model to the Robot Controller's FLASH.
-        tfod.loadModelFromAsset(TFOD_MODEL_ASSET, LABELS);
-        // tfod.loadModelFromFile(TFOD_MODEL_FILE, LABELS);
-    }
+
+    // last year auto -- doesn't work this year centerstage
+//    private void initTfod() {
+//        int tfodMonitorViewId = hardwareMap.appContext.getResources().getIdentifier(
+//                "tfodMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+//        TFObjectDetector.Parameters tfodParameters = new TFObjectDetector.Parameters();
+//        tfodParameters.minResultConfidence = 0.75f;
+//        tfodParameters.isModelTensorFlow2 = true;
+//        tfodParameters.inputSize = 300;
+//        tfod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
+//
+//        // Use loadModelFromAsset() if the TF Model is built in as an asset by Android Studio
+//        // Use loadModelFromFile() if you have downloaded a custom team model to the Robot Controller's FLASH.
+//        tfod.loadModelFromAsset(TFOD_MODEL_ASSET, LABELS);
+//        // tfod.loadModelFromFile(TFOD_MODEL_FILE, LABELS);
+//    }
+
+        private void initTfod() {
+            public tfoddetection temp_tfoddetection = new tfoddetection();
+            temp_tfoddetection.inittfod();
+        }
+
 }
