@@ -102,11 +102,11 @@ public class lastyearauto extends Driving358 {
      */
     private static final String TFOD_MODEL_ASSET = "CenterStage.tflite";
 
-    private static int parkLevel=0;
+    private static int pixellevel=0;
     private static final String[] LABELS = {
-            "1 Bolt",
-            "2 Bulb",
-            "3 Panel"
+            "1 Up",
+            "2 Middle",
+            "3 Down"
     };
 
 
@@ -177,15 +177,15 @@ public class lastyearauto extends Driving358 {
 //        telemetry.addData(">", "Press Play to start op mode");
         telemetry.update();
         waitForStart();
-        parkLevel = checkLevel();
+        pixellevel = checkLevel();
         sleep(200);
         //move(.6, 'f', 10);
         sleep(200);
 
-        parkLevel = checkLevel();
-        telemetry.addData("Level","%d",parkLevel);
+        pixellevel = checkLevel();
+        telemetry.addData("Level","%d",pixellevel);
         telemetry.update();
-        switch (parkLevel) {//moves to the alliance shipping hub based on what it reads
+        switch (pixellevel) {//moves to the alliance shipping hub based on what it reads
             case (1)://Warehouse close. Scoring level 1. Bottom
                 move(.1, 'l', 55);
                 move(.1, 'f', 60);
@@ -261,9 +261,8 @@ public class lastyearauto extends Driving358 {
 
                 // Share the CPU.
                 sleep(20);
-
-
             }
+
         } else if (TuningOpModes.DRIVE_CLASS.equals(TankDrive.class)) {
             TankDrive drive = new TankDrive(hardwareMap, new Pose2d(0, 0, 0));
 
@@ -314,18 +313,18 @@ public class lastyearauto extends Driving358 {
                             telemetry.addData("Image", "Level %s (%.0f %% Conf.)", recognition.getLabel(), recognition.getConfidence() * 100);
 //                            telemetry.addData("- Position (Row/Col)","%.0f / %.0f", row, col);
 //                            telemetry.addData("- Size (Width/Height)","%.0f / %.0f", width, height);
-                            if (recognition.getLabel().equalsIgnoreCase("1 Bolt")) {
-                                telemetry.addData("BOLT", " ");
+                            if (recognition.getLabel().equalsIgnoreCase("1 Up")) {
+                                telemetry.addData("Up", " ");
                                 return 1;
 
                             }
-                            if (recognition.getLabel().equalsIgnoreCase("2 BULB")) {
-                                telemetry.addData("BULB", " ");
+                            if (recognition.getLabel().equalsIgnoreCase("2 Middle")) {
+                                telemetry.addData("Middle", " ");
                                 return 2;
 
                             }
-                            if (recognition.getLabel().equalsIgnoreCase("3 Panel")) {
-                                telemetry.addData("PANEL", " ");
+                            if (recognition.getLabel().equalsIgnoreCase("3 Down")) {
+                                telemetry.addData("Down", " ");
                                 return 3;
 
                             }

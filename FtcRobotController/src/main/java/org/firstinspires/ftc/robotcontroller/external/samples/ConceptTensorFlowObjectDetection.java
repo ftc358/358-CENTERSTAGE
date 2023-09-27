@@ -107,16 +107,16 @@ public class ConceptTensorFlowObjectDetection extends LinearOpMode {
         // Create the TensorFlow processor by using a builder.
         tfod = new TfodProcessor.Builder()
 
-            // Use setModelAssetName() if the TF Model is built in as an asset.
-            // Use setModelFileName() if you have downloaded a custom team model to the Robot Controller.
-            //.setModelAssetName(TFOD_MODEL_ASSET)
-            //.setModelFileName(TFOD_MODEL_FILE)
-
-            //.setModelLabels(LABELS)
-            //.setIsModelTensorFlow2(true)
-            //.setIsModelQuantized(true)
-            //.setModelInputSize(300)
-            //.setModelAspectRatio(16.0 / 9.0)
+//             Use setModelAssetName() if the TF Model is built in as an asset.
+//             Use setModelFileName() if you have downloaded a custom team model to the Robot Controller.
+//            .setModelAssetName(TFOD_MODEL_ASSET)
+//            .setModelFileName(TFOD_MODEL_FILE)
+//
+//            .setModelLabels(LABELS)
+//            .setIsModelTensorFlow2(true)
+//            .setIsModelQuantized(true)
+//            .setModelInputSize(300)
+//            .setModelAspectRatio(16.0 / 9.0)
 
             .build();
 
@@ -131,10 +131,10 @@ public class ConceptTensorFlowObjectDetection extends LinearOpMode {
         }
 
         // Choose a camera resolution. Not all cameras support all resolutions.
-        //builder.setCameraResolution(new Size(640, 480));
+       // builder.setCameraResolution(new Size(640, 480));
 
         // Enable the RC preview (LiveView).  Set "false" to omit camera monitoring.
-        //builder.enableCameraMonitoring(true);
+      //  builder.enableCameraMonitoring(true);
 
         // Set the stream format; MJPEG uses less bandwidth than default YUY2.
         //builder.setStreamFormat(VisionPortal.StreamFormat.YUY2);
