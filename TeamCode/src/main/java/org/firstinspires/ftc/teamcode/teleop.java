@@ -71,6 +71,32 @@ public class teleop extends LinearOpMode{
 
             telemetry.update();
 
+
+            ////////////////// LIFT ////////////////////
+
+            // at rest //
+            if (gamepad2.dpad_up == false && gamepad2.dpad_down == false) {
+                hardware358.lift_servo_left.setPower(0);
+//                hardware358.lift_servo_right.setPower(0);
+                telemetry.addData(">", "doing nothing with lift servos");
+                telemetry.update();
+            }
+            // UP //
+            else if (gamepad2.dpad_up == true) {
+                hardware358.lift_servo_left.setPower(0.3);
+//                hardware358.lift_servo_right.setPower(0.3);
+                telemetry.addData(">", "lift servo up");
+                telemetry.update();
+            }
+            // DOWN //
+            else if (gamepad2.dpad_down == true) {
+                hardware358.lift_servo_left.setPower(-0.3);
+//                hardware358.lift_servo_right.setPower(-0.3);
+                telemetry.addData(">", "lift servo down");
+                telemetry.update();
+            }
+
+
             ////////////////// INTAKE //////////////////
 
             // at rest //
