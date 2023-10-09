@@ -70,6 +70,27 @@ public class teleop extends LinearOpMode{
            */
 
             telemetry.update();
+
+            ////////////////// INTAKE //////////////////
+
+            // at rest //
+            if (gamepad2.left_stick_y == 0) {
+                hardware358.intake.setPower(0);
+                telemetry.addData(">", "not intaking");
+                telemetry.update();
+            }
+            // IN //
+            else if (gamepad2.left_stick_y < -0.5) {
+                hardware358.intake.setPower(0.3);
+                telemetry.addData(">", "intaking...");
+                telemetry.update();
+            }
+            // OUT //
+            else if (gamepad2.left_stick_y > 0.5){
+                hardware358.intake.setPower(-0.3);
+                telemetry.addData(">", "spitting out pixels...");
+                telemetry.update();
+            }
         }
     }
 }
