@@ -23,21 +23,21 @@ public class teleop extends LinearOpMode{
             // Combine the joystick requests for each axis-motion to determine each wheel's power.
             // Set up a variable for each drive wheel to save the power level for telemetry.
             double leftFrontPower  = axial + lateral + yaw;
-            double rightFrontPower = axial - lateral - yaw;
+            double RightFrontPower = axial - lateral - yaw;
             double leftBackPower   = axial - lateral + yaw;
-            double rightBackPower  = axial + lateral - yaw;
+            double RightBackPower  = axial + lateral - yaw;
 
             // Normalize the values so no wheel power exceeds 100%
             // This ensures that the robot maintains the desired motion.
-            max = Math.max(Math.abs(leftFrontPower), Math.abs(rightFrontPower));
+            max = Math.max(Math.abs(leftFrontPower), Math.abs(RightFrontPower));
             max = Math.max(max, Math.abs(leftBackPower));
-            max = Math.max(max, Math.abs(rightBackPower));
+            max = Math.max(max, Math.abs(RightBackPower));
 
             if (max > 1.0) {
                 leftFrontPower  /= max;
-                rightFrontPower /= max;
+                RightFrontPower /= max;
                 leftBackPower   /= max;
-                rightBackPower  /= max;
+                RightBackPower  /= max;
             }
 
             // This is test code:
@@ -59,9 +59,9 @@ public class teleop extends LinearOpMode{
 
             // Send calculated power to wheels
             map.LeftFront.setPower(leftFrontPower);
-            map.RightFront.setPower(rightFrontPower);
+            map.RightFront.setPower(RightFrontPower);
             map.LeftBack.setPower(leftBackPower);
-            map.RightBack.setPower(rightBackPower);
+            map.RightBack.setPower(RightBackPower);
 /*
             map.LeftFront.setPower(leftFrontPower);
             map.RightFront.setPower(rightFrontPower);

@@ -82,7 +82,7 @@ public class hardware358 {
         LeftFront = hardwareMap.get(DcMotor.class, "lf");
         RightFront = hardwareMap.get(DcMotor.class, "rf");
         LeftBack = hardwareMap.get(DcMotor.class, "lb");
-        RightBack = hardwareMap.get(DcMotor.class, "rightBack");
+        RightBack = hardwareMap.get(DcMotor.class, "rb");
         clawServo = hardwareMap.get(Servo.class, "clawServo");
 
         LeftFront.setDirection(DcMotorSimple.Direction.REVERSE);
