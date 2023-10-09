@@ -71,8 +71,8 @@ public class teleop extends LinearOpMode{
 
             telemetry.update();
 
-
             ////////////////// LIFT ////////////////////
+
 
             // at rest //
             if (gamepad2.dpad_up == false && gamepad2.dpad_down == false) {
