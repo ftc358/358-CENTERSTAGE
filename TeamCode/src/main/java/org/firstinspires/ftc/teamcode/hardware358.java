@@ -29,7 +29,8 @@ package org.firstinspires.ftc.teamcode;
          */
 
 
-        import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+        import com.qualcomm.robotcore.hardware.CRServo;
         import com.qualcomm.robotcore.hardware.DcMotor;
         import com.qualcomm.robotcore.hardware.DcMotorSimple;
         import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -70,6 +71,8 @@ public class hardware358 {
 
     public static DcMotor intake = null;
 
+    public static CRServo lift_servo_right = null;
+    public static CRServo lift_servo_left = null;
 
     // Define a constructor that allows the OpMode to pass a reference to itself.
     public hardware358(HardwareMap hardwareMap) {
