@@ -94,7 +94,7 @@ public class hardware358 {
         LeftBack.setDirection(DcMotorSimple.Direction.REVERSE);
 
     }
-    public static void init()    {
+    public static void init(HardwareMap HwMap)    {
         // Define and Initialize Motors (note: need to use reference to actual OpMode).
         LeftFront  = myOpMode.hardwareMap.get(DcMotor.class, "lf");
         RightFront  = myOpMode.hardwareMap.get(DcMotor.class, "rf");

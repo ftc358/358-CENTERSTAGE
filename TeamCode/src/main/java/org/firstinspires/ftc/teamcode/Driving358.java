@@ -178,22 +178,22 @@ public abstract class Driving358 extends LinearOpMode {
 //    }
 
 
-    public void liftdown(){
-
-        robot.lift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        long starting= System.currentTimeMillis();
-
-
-        robot.lift.setPower(-0.2);
-        while (starting - System.currentTimeMillis()<100){
-            if(robot.touch.isPressed()){
-                robot.lift.setPower(0);
-                telemetry.addData("touch pressed",1);
-                break;
-            }
-
-        }
-        robot.lift.setPower(0);
+//    public void liftdown(){
+//
+//        robot.lift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        long starting= System.currentTimeMillis();
+//
+//
+//        robot.lift.setPower(-0.2);
+//        while (starting - System.currentTimeMillis()<100){
+//            if(robot.touch.isPressed()){
+//                robot.lift.setPower(0);
+//                telemetry.addData("touch pressed",1);
+//                break;
+//            }
+//
+//        }
+//        robot.lift.setPower(0);
 
 
 //        while (robot.lift.isBusy()) {
