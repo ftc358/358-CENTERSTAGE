@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
-@TeleOp
+@TeleOp(name="Robot: teleop", group="Robot")
 public class teleop extends LinearOpMode{
     @Override
     public void runOpMode() throws InterruptedException {
@@ -76,28 +76,29 @@ public class teleop extends LinearOpMode{
 
             // at rest //
             if (gamepad2.dpad_up == false && gamepad2.dpad_down == false) {
-                hardware358.lift_servo_left.setPower(0);
-//                hardware358.lift_servo_right.setPower(0);
+                hardware358.lift_servo1.setPower(0);
+                hardware358.lift_servo2.setPower(0);
                 telemetry.addData(">", "doing nothing with lift servos");
                 telemetry.update();
             }
             // UP //
             else if (gamepad2.dpad_up == true) {
-                hardware358.lift_servo_left.setPower(0.3);
-//                hardware358.lift_servo_right.setPower(0.3);
+                hardware358.lift_servo1.setPower(0.3);
+                hardware358.lift_servo2.setPower(-0.3);
                 telemetry.addData(">", "lift servo up");
                 telemetry.update();
             }
             // DOWN //
             else if (gamepad2.dpad_down == true) {
-                hardware358.lift_servo_left.setPower(-0.3);
-//                hardware358.lift_servo_right.setPower(-0.3);
+                hardware358.lift_servo1.setPower(-0.3);
+                hardware358.lift_servo2.setPower(0.3);
                 telemetry.addData(">", "lift servo down");
                 telemetry.update();
             }
 
 
             ////////////////// INTAKE //////////////////
+
 
             // at rest //
             if (gamepad2.left_stick_y == 0) {
