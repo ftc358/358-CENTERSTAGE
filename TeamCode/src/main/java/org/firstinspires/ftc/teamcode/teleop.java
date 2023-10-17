@@ -56,7 +56,6 @@ public class teleop extends LinearOpMode{
             rightFrontPower = gamepad1.y ? 1.0 : 0.0;  // Y gamepad
             rightBackPower  = gamepad1.b ? 1.0 : 0.0;  // B gamepad
             */
-
             // Send calculated power to wheels
             map.LeftFront.setPower(leftFrontPower);
             map.RightFront.setPower(RightFrontPower);
@@ -73,27 +72,25 @@ public class teleop extends LinearOpMode{
 
             ////////////////// LIFT ////////////////////
 
+             // This loop[l runs as long as the OpMode is active
 
-
-            // UP //
+            // Check the gamepad input
             if (gamepad2.dpad_up) {
                 hardware358.lift_servo1.setPower(0.3);
                 hardware358.lift_servo2.setPower(-0.3);
-                telemetry.addData(">", "lift servo up");
-
-            }
-            // DOWN //
-            else if (gamepad2.dpad_down) {
+                telemetry.addData(">", "Lift servo moving up");
+            } else if (gamepad2.dpad_down) {
                 hardware358.lift_servo1.setPower(-0.3);
                 hardware358.lift_servo2.setPower(0.3);
-                telemetry.addData(">", "lift servo down");
-
-            }
-            // at rest //
-            else if ((!gamepad2.dpad_up) && !gamepad2.dpad_down) {
+                telemetry.addData(">", "Lift servo moving down");
+            } else {
                 hardware358.lift_servo1.setPower(0);
                 hardware358.lift_servo2.setPower(0);
-                telemetry.addData(">", "doing nothing with lift servos");
+                telemetry.addData(">", "Lift servo at rest");
+            }
+
+            // Update telemetry to show the current state
+            telemetry.update();
 
 
             ////////////////// INTAKE //////////////////
@@ -121,5 +118,6 @@ public class teleop extends LinearOpMode{
         }
     }
 }
+
 
 
