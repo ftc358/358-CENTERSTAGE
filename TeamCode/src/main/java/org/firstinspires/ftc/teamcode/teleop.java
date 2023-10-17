@@ -69,32 +69,31 @@ public class teleop extends LinearOpMode{
             map.RightBack.setPower(rightBackPower);
            */
 
-            telemetry.update();
+
 
             ////////////////// LIFT ////////////////////
 
 
-            // at rest //
-            if (gamepad2.dpad_up == false && gamepad2.dpad_down == false) {
-                hardware358.lift_servo1.setPower(0);
-                hardware358.lift_servo2.setPower(0);
-                telemetry.addData(">", "doing nothing with lift servos");
-                telemetry.update();
-            }
+
             // UP //
-            else if (gamepad2.dpad_up == true) {
+            if (gamepad2.dpad_up) {
                 hardware358.lift_servo1.setPower(0.3);
                 hardware358.lift_servo2.setPower(-0.3);
                 telemetry.addData(">", "lift servo up");
-                telemetry.update();
+
             }
             // DOWN //
-            else if (gamepad2.dpad_down == true) {
+            else if (gamepad2.dpad_down) {
                 hardware358.lift_servo1.setPower(-0.3);
                 hardware358.lift_servo2.setPower(0.3);
                 telemetry.addData(">", "lift servo down");
-                telemetry.update();
+
             }
+            // at rest //
+            else if ((!gamepad2.dpad_up) && !gamepad2.dpad_down) {
+                hardware358.lift_servo1.setPower(0);
+                hardware358.lift_servo2.setPower(0);
+                telemetry.addData(">", "doing nothing with lift servos");
 
 
             ////////////////// INTAKE //////////////////
@@ -104,20 +103,21 @@ public class teleop extends LinearOpMode{
             if (gamepad2.left_stick_y == 0) {
                 hardware358.intake.setPower(0);
                 telemetry.addData(">", "not intaking");
-                telemetry.update();
+
             }
             // IN //
             else if (gamepad2.left_stick_y < -0.5) {
                 hardware358.intake.setPower(0.3);
                 telemetry.addData(">", "intaking...");
-                telemetry.update();
+
             }
             // OUT //
             else if (gamepad2.left_stick_y > 0.5){
                 hardware358.intake.setPower(-0.3);
                 telemetry.addData(">", "spitting out pixels...");
-                telemetry.update();
+
             }
+            telemetry.update();
         }
     }
 }
