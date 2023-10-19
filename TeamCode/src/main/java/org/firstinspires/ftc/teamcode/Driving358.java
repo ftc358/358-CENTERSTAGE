@@ -5,13 +5,14 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+
 public abstract class Driving358 extends LinearOpMode {
 
 
     hardware358 robot = new hardware358(hardwareMap);
+//
     int hi=8;
     private ElapsedTime runtime = new ElapsedTime();
-
     static final double     COUNTS_PER_MOTOR_REV    = 537.6 ;    // eg: REV Motor Encoder
     static final double     DRIVE_GEAR_REDUCTION    = 2;     // This is < 1.0 if geared UP
     static final double     WHEEL_DIAMETER_INCHES   = 4.0 ;     // For figuring circumference
@@ -20,18 +21,14 @@ public abstract class Driving358 extends LinearOpMode {
     static final double     DRIVE_SPEED             = 0.5;
     static final double     TURN_SPEED              = 0.5;
     static final double     INCHES_FOR_RIGHT_ANGLE  = 4;
-
     static final double     LIFT_COUNTS_FULL_REVOLVE= 1440 /4;
-
     final double DESIRED_DISTANCE = 8.0; //  this is how close the camera should get to the target (inches)
     //  The GAIN constants set the relationship between the measured position error,
     //  and how much power is applied to the drive motors.  Drive = Error * Gain
     //  Make these values smaller for smoother control.
     final double SPEED_GAIN =   0.02 ;   //  Speed Control "Gain". eg: Ramp up to 50% power at a 25 inch error.   (0.50 / 25.0)
     final double TURN_GAIN  =   0.01 ;   //  Turn Control "Gain".  eg: Ramp up to 25% power at a 25 degree error. (0.25 / 25.0)
-
     final double MM_PER_INCH = 25.40 ;   //  Metric conversion
-
     public void motorStop() {
         robot.LeftFront.setPower(0);
         robot.RightFront.setPower(0);
@@ -72,20 +69,20 @@ public abstract class Driving358 extends LinearOpMode {
 
 
     //
-    public void liftconeauto(int direction, double power,char remaining){
-        //remaining is for the number of cones remaining in the stack
-        int tickConversion = (int)(COUNTS_PER_MOTOR_REV/(3.14));//145; //How many ticks per 1cm of string pulled
-        int cmMoveauto = 0;
-        int ticks;
-//        if (position.equals("low")){
-//            cmMove  = 35;
-//        }
-//        else if (position.equals("mid")){
-//            cmMove  = 60;
-//        }
-//        else if (position.equals("high")){
-//            cmMove  = 85;
-//        }
+//    public void liftconeauto(int direction, double power,char remaining){
+//        //remaining is for the number of cones remaining in the stack
+//        int tickConversion = (int)(COUNTS_PER_MOTOR_REV/(3.14));//145; //How many ticks per 1cm of string pulled
+//        int cmMoveauto = 0;
+//        int ticks;
+////        if (position.equals("low")){
+////            cmMove  = 35;
+////        }
+////        else if (position.equals("mid")){
+////            cmMove  = 60;
+////        }
+////        else if (position.equals("high")){
+////            cmMove  = 85;
+////        }
 
 
 
@@ -207,11 +204,11 @@ public abstract class Driving358 extends LinearOpMode {
 //        while (!robot.touch.isPressed()){
 //            telemetry.addData("button is pressed doen",1);
 //        }
-
-    }
+//}
 
 
     public void move(double power, char direction, double distance){
+        reset();
         double ticks = COUNTS_PER_INCH * distance/3;
 //        double ticks = 7.5* distance;
         switch(direction){
@@ -237,7 +234,8 @@ public abstract class Driving358 extends LinearOpMode {
 
                 }
                 motorStop();
-                runUsingEncoders();
+                //runUsingEncoders();
+                //reset();
                 break;
             case 'b':
                 //setting power of motors to go backward
@@ -266,7 +264,8 @@ public abstract class Driving358 extends LinearOpMode {
 
                 }
                 motorStop();
-                runUsingEncoders();
+                //runUsingEncoders();
+                //reset();
                 break;
 
             case 'r':
@@ -291,7 +290,8 @@ public abstract class Driving358 extends LinearOpMode {
 
                 }
                 motorStop();
-                runUsingEncoders();
+                //runUsingEncoders();
+                //reset();
                 break;
             case 'l' :
                 // to strafe left
@@ -315,7 +315,8 @@ public abstract class Driving358 extends LinearOpMode {
 
                 }
                 motorStop();
-                runUsingEncoders();
+                //runUsingEncoders();
+                //reset();
                 break;
 
             default:
@@ -324,83 +325,83 @@ public abstract class Driving358 extends LinearOpMode {
     }
 
 
-    public void liftlevel(double power, char direction){
-        int tickConversion = (int)(Driving358.COUNTS_PER_MOTOR_REV/(3.14));
-        int cmMovelift;
-        int ticks;
-        switch(direction){
-            case '1' :
-                cmMovelift  = 5;
-                ticks = tickConversion * cmMovelift;
-                if (power<0){
-                    ticks*=-1;
-                }
-                robot.lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-                robot.lift.setTargetPosition((ticks));
-                robot.lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                robot.lift.setPower(power);
-                while (robot.lift.isBusy()) {
+//    public void liftlevel(double power, char direction){
+//        int tickConversion = (int)(Driving358.COUNTS_PER_MOTOR_REV/(3.14));
+//        int cmMovelift;
+//        int ticks;
+//        switch(direction){
+//            case '1' :
+//                cmMovelift  = 5;
+//                ticks = tickConversion * cmMovelift;
+//                if (power<0){
+//                    ticks*=-1;
+//                }
+//                robot.lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//                robot.lift.setTargetPosition((ticks));
+//                robot.lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//                robot.lift.setPower(power);
+//                while (robot.lift.isBusy()) {
+//
+//                }
 
-                }
-
-                robot.lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-                break;
-            case '2' ://u for up
-                cmMovelift  = 9;
-
-                ticks = tickConversion * cmMovelift;
-                if (power<0){
-                    ticks*=-1;
-                }
-                robot.lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-                robot.lift.setTargetPosition((ticks));
-                robot.lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                robot.lift.setPower(power);
-                while (robot.lift.isBusy()) {
-
-                }
-                robot.lift.setPower(0);
-                robot.lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                //cmMovelift = 0;
-                break;
-            case '3'://u for up
-                cmMovelift = 3;
-                ticks = tickConversion * cmMovelift;
-                if (power<0){
-                    ticks*=-1;
-                }
-                robot.lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-                robot.lift.setTargetPosition((ticks));
-                robot.lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                robot.lift.setPower(power);
-                while (robot.lift.isBusy()) {
-
-                }
-                robot.lift.setPower(0);
-                robot.lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                //cmMovelift = 0;
-                break;
-        }
-
-    }
-
-    public void clawrotate(String position){
-        switch (position){
-            case "close":
-                //robot.leftServo.setPosition(0.95);
-                //robot.rightServo.setPosition(0.95);
-                robot.clawServo.setPosition(0.0);
-                break;
-            case "open":
-                //robot.leftServo.setPosition(0.6);
-                //robot.rightServo.setPosition(0.34);
-                robot.clawServo.setPosition(0.5);
-                break;
-        }
-
-
-    }
+//                robot.lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//
+//                break;
+//            case '2' ://u for up
+//                cmMovelift  = 9;
+//
+//                ticks = tickConversion * cmMovelift;
+//                if (power<0){
+//                    ticks*=-1;
+//                }
+//                robot.lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//                robot.lift.setTargetPosition((ticks));
+//                robot.lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//                robot.lift.setPower(power);
+//                while (robot.lift.isBusy()) {
+//
+//                }
+//                robot.lift.setPower(0);
+//                robot.lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//                //cmMovelift = 0;
+//                break;
+//            case '3'://u for up
+//                cmMovelift = 3;
+//                ticks = tickConversion * cmMovelift;
+//                if (power<0){
+//                    ticks*=-1;
+//                }
+//                robot.lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//                robot.lift.setTargetPosition((ticks));
+//                robot.lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//                robot.lift.setPower(power);
+//                while (robot.lift.isBusy()) {
+//
+//                }
+//                robot.lift.setPower(0);
+//                robot.lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//                //cmMovelift = 0;
+//                break;
+//        }
+//
+//    }
+//
+//    public void clawrotate(String position){
+//        switch (position){
+//            case "close":
+//                //robot.leftServo.setPosition(0.95);
+//                //robot.rightServo.setPosition(0.95);
+//                robot.clawServo.setPosition(0.0);
+//                break;
+//            case "open":
+//                //robot.leftServo.setPosition(0.6);
+//                //robot.rightServo.setPosition(0.34);
+//                robot.clawServo.setPosition(0.5);
+//                break;
+//        }
+//
+//
+//    }
 //    public void slidemove(String position){
 //        switch (position){
 //            case "front":

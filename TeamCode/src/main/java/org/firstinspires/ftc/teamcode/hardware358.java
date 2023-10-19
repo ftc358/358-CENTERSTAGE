@@ -30,11 +30,10 @@ package org.firstinspires.ftc.teamcode;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-        import com.qualcomm.robotcore.hardware.CRServo;
-        import com.qualcomm.robotcore.hardware.DcMotor;
-        import com.qualcomm.robotcore.hardware.DcMotorSimple;
-        import com.qualcomm.robotcore.hardware.HardwareMap;
-        import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.CRServo;
 
 /**
  * This file works in conjunction with the External Hardware Class sample called: ConceptExternalHardwareClass.java
@@ -66,16 +65,24 @@ public class hardware358 {
     public static DcMotor LeftBack = null;
     public static DcMotor RightBack = null;
 
-    public static DcMotor lift = null;
-    public static Servo   clawServo = null;
+//    public static DcMotor lift=null;
+    public static CRServo lift_servo1 = null;
+    public static CRServo lift_servo2 = null;
 
-    public static DcMotor intake = null;
+
+
+
+    //public static DcMotor lift = null;
+    //public static Servo   clawServo = null;
+
+    //public static DcMotor intake = null;
+
 
     public static CRServo lift_servo1 = null;
     public static CRServo lift_servo2 = null;
 
     // Define a constructor that allows the OpMode to pass a reference to itself.
-    public hardware358(HardwareMap hardwareMap) {
+    public hardware358(HardwareMap HardwareMap) {
 
         /**
          * Initialize all the robot's hardware.
@@ -83,23 +90,18 @@ public class hardware358 {
          *
          * All of the hardware devices are accessed via the hardware map, and initialized.
          */
-        // Define and Initialize Motors (note: need to use reference to actual OpMode).
-        LeftFront = hardwareMap.get(DcMotor.class, "lf");
-        RightFront = hardwareMap.get(DcMotor.class, "rf");
-        LeftBack = hardwareMap.get(DcMotor.class, "lb");
-        RightBack = hardwareMap.get(DcMotor.class, "rb");
-        clawServo = hardwareMap.get(Servo.class, "clawServo");
 
-        LeftFront.setDirection(DcMotorSimple.Direction.REVERSE);
-        LeftBack.setDirection(DcMotorSimple.Direction.REVERSE);
-
+        //init(hardwareMap);
     }
-    public static void init(HardwareMap HwMap)    {
+    public void init(HardwareMap HwMap)    {
         // Define and Initialize Motors (note: need to use reference to actual OpMode).
-        LeftFront  = myOpMode.hardwareMap.get(DcMotor.class, "lf");
-        RightFront  = myOpMode.hardwareMap.get(DcMotor.class, "rf");
-        LeftBack  = myOpMode.hardwareMap.get(DcMotor.class, "lb");
-        RightBack  = myOpMode.hardwareMap.get(DcMotor.class, "rb");
+        LeftFront  = HwMap.get(DcMotor.class, "lf");
+        RightFront  = HwMap.get(DcMotor.class, "rf");
+        LeftBack  = HwMap.get(DcMotor.class, "lb");
+        RightBack  = HwMap.get(DcMotor.class, "rb");
+        lift_servo1  = myOpMode.hardwareMap.get(CRServo.class, "lift_servo1");
+        lift_servo2  = myOpMode.hardwareMap.get(CRServo.class, "lift_servo2");
+//        clawServo = HwMap.get(Servo.class, "clawServo");
 
         lift_servo1  = myOpMode.hardwareMap.get(CRServo.class, "lift_servo1");
         lift_servo2  = myOpMode.hardwareMap.get(CRServo.class, "lift_servo2");

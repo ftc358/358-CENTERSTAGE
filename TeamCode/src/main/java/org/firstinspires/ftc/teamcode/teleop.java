@@ -2,41 +2,48 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 @TeleOp(name="Robot: teleop", group="Robot")
 public class teleop extends LinearOpMode{
     @Override
     public void runOpMode() throws InterruptedException {
         hardware358 map= new hardware358(hardwareMap);
-        waitForStart();
-        while (opModeIsActive()) {
+
+    public void init() {
+        map.init(hardwareMap);
+    }
+
+       // waitForStart();
+        public void loop() {
             double max;
             double test;
 
-            // POV Mode uses left joystick to go forward & strafe, and right joystick to rotate.
+            //POV Mode uses left joystick to go forward & strafe, and right joystick to rotate.
             double axial   = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
             double lateral =  gamepad1.left_stick_x;
             double yaw     =  gamepad1.right_stick_x;
 
-            // Combine the joystick requests for each axis-motion to determine each wheel's power.
-            // Set up a variable for each drive wheel to save the power level for telemetry.
-            double leftFrontPower  = axial + lateral + yaw;
+             //Combine the joystick requests for each axis-motion to determine each wheel's power.
+             //Set up a variable for each drive wheel to save the power level for telemetry.
+            double LeftFrontPower  = axial + lateral + yaw;
             double RightFrontPower = axial - lateral - yaw;
-            double leftBackPower   = axial - lateral + yaw;
+            double LeftBackPower   = axial - lateral + yaw;
             double RightBackPower  = axial + lateral - yaw;
 
             // Normalize the values so no wheel power exceeds 100%
             // This ensures that the robot maintains the desired motion.
-            max = Math.max(Math.abs(leftFrontPower), Math.abs(RightFrontPower));
-            max = Math.max(max, Math.abs(leftBackPower));
+            max = Math.max(Math.abs(LeftFrontPower), Math.abs(RightFrontPower));
+            max = Math.max(max, Math.abs(LeftBackPower));
             max = Math.max(max, Math.abs(RightBackPower));
 
             if (max > 1.0) {
-                leftFrontPower  /= max;
+                LeftFrontPower  /= max;
                 RightFrontPower /= max;
-                leftBackPower   /= max;
+                LeftBackPower   /= max;
                 RightBackPower  /= max;
             }
 
@@ -59,18 +66,13 @@ public class teleop extends LinearOpMode{
             // Send calculated power to wheels
             map.LeftFront.setPower(leftFrontPower);
             map.RightFront.setPower(RightFrontPower);
-            map.LeftBack.setPower(leftBackPower);
+            map.LeftBack.setPower(LeftBackPower);
             map.RightBack.setPower(RightBackPower);
-/*
-            map.LeftFront.setPower(leftFrontPower);
-            map.RightFront.setPower(rightFrontPower);
-            map.LeftBack.setPower(leftBackPower);
-            map.RightBack.setPower(rightBackPower);
-           */
 
 
 
-            ////////////////// LIFT ////////////////////
+
+////////////////// LIFT ////////////////////
 
              // This loop[l runs as long as the OpMode is active
 
@@ -116,6 +118,13 @@ public class teleop extends LinearOpMode{
             telemetry.update();
         }
     }
+
+//    @Override
+//    public void init() {
+//
+//    }
+
+
 
 
 
