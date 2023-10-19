@@ -2,21 +2,22 @@
 
 package org.firstinspires.ftc.teamcode;
 
-        import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.openftc.apriltag.AprilTagDetection;
+import org.openftc.easyopencv.OpenCvCamera;
+import org.openftc.easyopencv.OpenCvCameraFactory;
+import org.openftc.easyopencv.OpenCvCameraRotation;
 
-        import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-        import org.openftc.apriltag.AprilTagDetection;
-        import org.openftc.easyopencv.OpenCvCamera;
-        import org.openftc.easyopencv.OpenCvCameraFactory;
-        import org.openftc.easyopencv.OpenCvCameraRotation;
-
-        import java.util.ArrayList;
+import java.util.ArrayList;
 
 @Autonomous
 public class theREALauto extends Driving358
 {
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
+
+
 
     static final double FEET_PER_METER = 3.28084;
 
@@ -212,7 +213,7 @@ public class theREALauto extends Driving358
             move(.3, 'r', 10);
         }
 
-
+        //after
 
 
 
