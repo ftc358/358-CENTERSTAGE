@@ -78,8 +78,8 @@ public class hardware358 {
     //public static DcMotor intake = null;
 
 
-    public static CRServo lift_servo1 = null;
-    public static CRServo lift_servo2 = null;
+//    public static CRServo lift_servo1 = null;
+//    public static CRServo lift_servo2 = null;
 
     // Define a constructor that allows the OpMode to pass a reference to itself.
     public hardware358(HardwareMap HardwareMap) {
@@ -102,9 +102,9 @@ public class hardware358 {
         lift_servo1  = myOpMode.hardwareMap.get(CRServo.class, "lift_servo1");
         lift_servo2  = myOpMode.hardwareMap.get(CRServo.class, "lift_servo2");
 //        clawServo = HwMap.get(Servo.class, "clawServo");
-
-        lift_servo1  = myOpMode.hardwareMap.get(CRServo.class, "lift_servo1");
-        lift_servo2  = myOpMode.hardwareMap.get(CRServo.class, "lift_servo2");
+//
+//        lift_servo1  = myOpMode.hardwareMap.get(CRServo.class, "lift_servo1");
+//        lift_servo2  = myOpMode.hardwareMap.get(CRServo.class, "lift_servo2");
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
         // Pushing the left stick forward MUST make robot go forward. So adjust these two lines based on your first test drive.
