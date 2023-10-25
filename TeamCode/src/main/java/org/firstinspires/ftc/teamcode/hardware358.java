@@ -78,8 +78,7 @@ public class hardware358 {
     //public static DcMotor intake = null;
 
 
-    public static CRServo lift_servo1 = null;
-    public static CRServo lift_servo2 = null;
+
 
     // Define a constructor that allows the OpMode to pass a reference to itself.
     public hardware358(HardwareMap HardwareMap) {
