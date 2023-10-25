@@ -11,7 +11,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 import java.util.ArrayList;
 
-@Autonomous
+@Autonomous(name = "BLUEfar", group = "Concept")
 public class theREALauto extends Driving358
 {
     OpenCvCamera camera;
@@ -34,7 +34,7 @@ public class theREALauto extends Driving358
     double tagsize = 0.166;
 
     int LEFT = 1;
-    int CENTER = 2;
+    int CENTER= 2;
     int RIGHT = 3;
 
     AprilTagDetection tagOfInterest = null;
@@ -199,7 +199,11 @@ public class theREALauto extends Driving358
 
         // If nothing detected
         if (tagOfInterest == null){
-            move (0.3,'f', 5);
+            move (0.3,'f', 100);
+            move (0.3,'r', 135);
+            armrotate("open");
+            tubrotate("open");
+
         }
 
         else if (tagOfInterest.id== LEFT) {

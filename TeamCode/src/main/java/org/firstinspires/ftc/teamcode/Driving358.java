@@ -206,13 +206,14 @@ public abstract class Driving358 extends LinearOpMode {
 //        }
 //}
 
-
+//IMPORTANT: WE REVERSED THE FRONT AMD BACK, LEFT AND RIGHT IN MOVE FUNCTION. CHANGE BACK IF SOMETHING WRONG
+    //USED TO BE FRONT AT FRONT, BACK, LEFT, RIGHT
     public void move(double power, char direction, double distance){
         reset();
         double ticks = COUNTS_PER_INCH * distance/3;
 //        double ticks = 7.5* distance;
         switch(direction){
-            case 'f':
+            case 'b':
                 //to go forward
 
                 //set target position
@@ -237,7 +238,7 @@ public abstract class Driving358 extends LinearOpMode {
                 //runUsingEncoders();
                 //reset();
                 break;
-            case 'b':
+            case 'f':
                 //setting power of motors to go backward
                 //set target position
                 robot.LeftFront.setTargetPosition((int) -ticks);
@@ -268,7 +269,7 @@ public abstract class Driving358 extends LinearOpMode {
                 //reset();
                 break;
 
-            case 'r':
+            case 'l':
                 //to strafe right
 
 
@@ -293,7 +294,7 @@ public abstract class Driving358 extends LinearOpMode {
                 //runUsingEncoders();
                 //reset();
                 break;
-            case 'l' :
+            case 'r' :
                 // to strafe left
 
                 //set target position
@@ -386,22 +387,41 @@ public abstract class Driving358 extends LinearOpMode {
 //
 //    }
 //
-//    public void clawrotate(String position){
-//        switch (position){
-//            case "close":
-//                //robot.leftServo.setPosition(0.95);
-//                //robot.rightServo.setPosition(0.95);
-//                robot.clawServo.setPosition(0.0);
-//                break;
-//            case "open":
-//                //robot.leftServo.setPosition(0.6);
-//                //robot.rightServo.setPosition(0.34);
-//                robot.clawServo.setPosition(0.5);
-//                break;
-//        }
-//
-//
-//    }
+    public void armrotate(String position) {
+        switch (position) {
+            case "open":
+                //robot.leftServo.setPosition(0.95);
+                //robot.rightServo.setPosition(0.95);
+                long starting = System.currentTimeMillis();
+                //spin for five seconds
+                robot.lift_servo1.setPower(0.5);
+                while (starting - System.currentTimeMillis() < 5000) {
+                }
+                robot.lift_servo1.setPower(0.0);
+                break;
+            case "close":
+                //robot.leftServo.setPosition(0.6);
+                //robot.rightServo.setPosition(0.34);
+//                long starting= System.currentTimeMillis();
+//                //spin for five seconds
+//                robot.lift_servo1.setPower(0.5);
+//                while (starting - System.currentTimeMillis()<5000) {
+//                }
+//                robot.lift_servo1.setPower(0.0);
+                break;
+        }
+    }
+
+    public void tubrotate(String position){
+        switch (position){
+            case "open":
+                robot.tub_servo.setPosition(0.3);
+                break;
+            case "close":
+                robot.tub_servo.setPosition(0.0);
+                break;
+        }
+    }
 //    public void slidemove(String position){
 //        switch (position){
 //            case "front":
@@ -421,167 +441,167 @@ public abstract class Driving358 extends LinearOpMode {
 
 
 
-    public void rotate(double power, char direction, double angle) {
-        double ticks = COUNTS_PER_INCH * angle / 90 * INCHES_FOR_RIGHT_ANGLE;
-//        double ticks = 7.5* distance;
-        switch(direction){
-            case 'r':
-                //to turn clockwise
-                robot.LeftFront.setTargetPosition((int)ticks);
-                robot.LeftBack.setTargetPosition((int)ticks);
-                robot.RightFront.setTargetPosition((int)-ticks);
-                robot.RightBack.setTargetPosition((int)-ticks);
-                //set run to position
-                runToPosition();
-                //set drive power for forward
-                robot.LeftFront.setPower(power);
-                robot.RightFront.setPower(-power);
-                robot.LeftBack.setPower(power);
-                robot.RightBack.setPower(-power);
-
-                while (robot.LeftFront.isBusy() && robot.LeftBack.isBusy() && robot.RightFront.isBusy() && robot.RightBack.isBusy())
-                {
-
-                }
-                motorStop();
-                runUsingEncoders();
-                break;
-            case 'l':
-                // to turn counter clockwise
-                robot.LeftFront.setTargetPosition((int)-ticks);
-                robot.LeftBack.setTargetPosition((int) -ticks);
-                robot.RightFront.setTargetPosition((int)ticks);
-                robot.RightBack.setTargetPosition((int) ticks);
-                //set run to position
-                runToPosition();
-
-                //set drive power for forward
-                robot.LeftFront.setPower(-power);
-                robot.RightFront.setPower(power);
-                robot.LeftBack.setPower(-power);
-                robot.RightBack.setPower(power);
-
-                while (robot.LeftFront.isBusy() && robot.LeftBack.isBusy() && robot.RightFront.isBusy() && robot.RightBack.isBusy())
-                {
-                    telemetry.clear();
-                    telemetry.addData("Front Left Pos", robot.LeftFront.getCurrentPosition());
-                    telemetry.addData("Front Right Pos", robot.RightFront.getCurrentPosition());
-                    telemetry.addData("Back Left Pos", robot.LeftBack.getCurrentPosition());
-                    telemetry.addData("Back Right (Mephistopheles) Pos", robot.RightBack.getCurrentPosition());
-                    telemetry.update();
-                }
-                motorStop();
-                runUsingEncoders();
-                break;
-            default:
-                motorStop();
-        }
+//    public void rotate(double power, char direction, double angle) {
+//        double ticks = COUNTS_PER_INCH * angle / 90 * INCHES_FOR_RIGHT_ANGLE;
+////        double ticks = 7.5* distance;
+//        switch(direction){
+//            case 'r':
+//                //to turn clockwise
+//                robot.LeftFront.setTargetPosition((int)ticks);
+//                robot.LeftBack.setTargetPosition((int)ticks);
+//                robot.RightFront.setTargetPosition((int)-ticks);
+//                robot.RightBack.setTargetPosition((int)-ticks);
+//                //set run to position
+//                runToPosition();
+//                //set drive power for forward
+//                robot.LeftFront.setPower(power);
+//                robot.RightFront.setPower(-power);
+//                robot.LeftBack.setPower(power);
+//                robot.RightBack.setPower(-power);
+//
+//                while (robot.LeftFront.isBusy() && robot.LeftBack.isBusy() && robot.RightFront.isBusy() && robot.RightBack.isBusy())
+//                {
+//
+//                }
+//                motorStop();
+//                runUsingEncoders();
+//                break;
+//            case 'l':
+//                // to turn counter clockwise
+//                robot.LeftFront.setTargetPosition((int)-ticks);
+//                robot.LeftBack.setTargetPosition((int) -ticks);
+//                robot.RightFront.setTargetPosition((int)ticks);
+//                robot.RightBack.setTargetPosition((int) ticks);
+//                //set run to position
+//                runToPosition();
+//
+//                //set drive power for forward
+//                robot.LeftFront.setPower(-power);
+//                robot.RightFront.setPower(power);
+//                robot.LeftBack.setPower(-power);
+//                robot.RightBack.setPower(power);
+//
+//                while (robot.LeftFront.isBusy() && robot.LeftBack.isBusy() && robot.RightFront.isBusy() && robot.RightBack.isBusy())
+//                {
+//                    telemetry.clear();
+//                    telemetry.addData("Front Left Pos", robot.LeftFront.getCurrentPosition());
+//                    telemetry.addData("Front Right Pos", robot.RightFront.getCurrentPosition());
+//                    telemetry.addData("Back Left Pos", robot.LeftBack.getCurrentPosition());
+//                    telemetry.addData("Back Right (Mephistopheles) Pos", robot.RightBack.getCurrentPosition());
+//                    telemetry.update();
+//                }
+//                motorStop();
+//                runUsingEncoders();
+//                break;
+//            default:
+//                motorStop();
+//        }
+//    }
+//    public void diagonal(double power, char direction, long distance){
+//        double ticks = 1120/7.5 * distance;
+//        switch(direction) {
+//            case '1':
+//                //forward right
+//
+//                //set target position
+//
+//                robot.LeftFront.setTargetPosition((int) (ticks));
+//                robot.LeftBack.setTargetPosition(0);
+//                robot.RightFront.setTargetPosition(0);
+//                robot.RightBack.setTargetPosition((int) ticks);
+//                //set run to position
+//                runToPosition();
+//
+//                //set drive power for forward
+//                robot.LeftFront.setPower(power);
+//                robot.RightFront.setPower(0);
+//                robot.LeftBack.setPower(0);
+//                robot.RightBack.setPower(power);
+//
+//                while (robot.LeftFront.isBusy() && robot.LeftBack.isBusy() && robot.RightFront.isBusy() && robot.RightBack.isBusy()) {
+//
+//                }
+//                motorStop();
+//                runUsingEncoders();
+//                break;
+//
+//            case '2':
+//                //forward left
+//
+//                //set target position
+//
+//                robot.LeftFront.setTargetPosition(0);
+//                robot.LeftBack.setTargetPosition((int) ticks);
+//                robot.RightFront.setTargetPosition((int) ticks);
+//                robot.RightBack.setTargetPosition(0);
+//                //set run to position
+//                runToPosition();
+//
+//                //set drive power for forward
+//                robot.LeftFront.setPower(0);
+//                robot.RightFront.setPower(power);
+//                robot.LeftBack.setPower(power);
+//                robot.RightBack.setPower(0);
+//
+//                while (robot.LeftFront.isBusy() && robot.LeftBack.isBusy() && robot.RightFront.isBusy() && robot.RightBack.isBusy()) {
+//
+//                }
+//                motorStop();
+//                runUsingEncoders();
+//                break;
+//            case '3':
+//                // go back right
+//
+//                robot.LeftFront.setTargetPosition(0);
+//                robot.LeftBack.setTargetPosition((int) -ticks);
+//                robot.RightFront.setTargetPosition((int) -ticks);
+//                robot.RightBack.setTargetPosition(0);
+//                //set run to position
+//                runToPosition();
+//
+//                //set drive power for forward
+//                robot.LeftFront.setPower(0);
+//                robot.RightFront.setPower(-power);
+//                robot.LeftBack.setPower(-power);
+//                robot.RightBack.setPower(0);
+//
+//                while (robot.LeftFront.isBusy() && robot.LeftBack.isBusy() && robot.RightFront.isBusy() && robot.RightBack.isBusy()) {
+//
+//                }
+//                motorStop();
+//                runUsingEncoders();
+//
+//
+//                break;
+//
+//            case '4':
+////back left
+//                robot.LeftFront.setTargetPosition((int) -ticks);
+//                robot.LeftBack.setTargetPosition(0);
+//                robot.RightFront.setTargetPosition(0);
+//                robot.RightBack.setTargetPosition((int) -ticks);
+//                //set run to position
+//                runToPosition();
+//
+//                //set drive power for forward
+//                robot.LeftFront.setPower(-power);
+//                robot.RightFront.setPower(0);
+//                robot.LeftBack.setPower(0);
+//                robot.RightBack.setPower(-power);
+//
+//                while (robot.LeftFront.isBusy() && robot.LeftBack.isBusy() && robot.RightFront.isBusy() && robot.RightBack.isBusy()) {
+//
+//                }
+//                motorStop();
+//                runUsingEncoders();
+//
+//
+//                break;
+//            default:
+//                motorStop();
+//
+//        }
     }
-    public void diagonal(double power, char direction, long distance){
-        double ticks = 1120/7.5 * distance;
-        switch(direction) {
-            case '1':
-                //forward right
-
-                //set target position
-
-                robot.LeftFront.setTargetPosition((int) (ticks));
-                robot.LeftBack.setTargetPosition(0);
-                robot.RightFront.setTargetPosition(0);
-                robot.RightBack.setTargetPosition((int) ticks);
-                //set run to position
-                runToPosition();
-
-                //set drive power for forward
-                robot.LeftFront.setPower(power);
-                robot.RightFront.setPower(0);
-                robot.LeftBack.setPower(0);
-                robot.RightBack.setPower(power);
-
-                while (robot.LeftFront.isBusy() && robot.LeftBack.isBusy() && robot.RightFront.isBusy() && robot.RightBack.isBusy()) {
-
-                }
-                motorStop();
-                runUsingEncoders();
-                break;
-
-            case '2':
-                //forward left
-
-                //set target position
-
-                robot.LeftFront.setTargetPosition(0);
-                robot.LeftBack.setTargetPosition((int) ticks);
-                robot.RightFront.setTargetPosition((int) ticks);
-                robot.RightBack.setTargetPosition(0);
-                //set run to position
-                runToPosition();
-
-                //set drive power for forward
-                robot.LeftFront.setPower(0);
-                robot.RightFront.setPower(power);
-                robot.LeftBack.setPower(power);
-                robot.RightBack.setPower(0);
-
-                while (robot.LeftFront.isBusy() && robot.LeftBack.isBusy() && robot.RightFront.isBusy() && robot.RightBack.isBusy()) {
-
-                }
-                motorStop();
-                runUsingEncoders();
-                break;
-            case '3':
-                // go back right
-
-                robot.LeftFront.setTargetPosition(0);
-                robot.LeftBack.setTargetPosition((int) -ticks);
-                robot.RightFront.setTargetPosition((int) -ticks);
-                robot.RightBack.setTargetPosition(0);
-                //set run to position
-                runToPosition();
-
-                //set drive power for forward
-                robot.LeftFront.setPower(0);
-                robot.RightFront.setPower(-power);
-                robot.LeftBack.setPower(-power);
-                robot.RightBack.setPower(0);
-
-                while (robot.LeftFront.isBusy() && robot.LeftBack.isBusy() && robot.RightFront.isBusy() && robot.RightBack.isBusy()) {
-
-                }
-                motorStop();
-                runUsingEncoders();
 
 
-                break;
-
-            case '4':
-//back left
-                robot.LeftFront.setTargetPosition((int) -ticks);
-                robot.LeftBack.setTargetPosition(0);
-                robot.RightFront.setTargetPosition(0);
-                robot.RightBack.setTargetPosition((int) -ticks);
-                //set run to position
-                runToPosition();
-
-                //set drive power for forward
-                robot.LeftFront.setPower(-power);
-                robot.RightFront.setPower(0);
-                robot.LeftBack.setPower(0);
-                robot.RightBack.setPower(-power);
-
-                while (robot.LeftFront.isBusy() && robot.LeftBack.isBusy() && robot.RightFront.isBusy() && robot.RightBack.isBusy()) {
-
-                }
-                motorStop();
-                runUsingEncoders();
-
-
-                break;
-            default:
-                motorStop();
-
-        }
-    }
-
-}
 
