@@ -12,13 +12,9 @@ public class teleop extends LinearOpMode{
     @Override
     public void runOpMode() throws InterruptedException {
         hardware358 map= new hardware358(hardwareMap);
-
-    public void init() {
         map.init(hardwareMap);
-    }
-
-       // waitForStart();
-        public void loop() {
+        waitForStart();
+        while (opModeIsActive()) {
             double max;
             double test;
 
@@ -64,7 +60,7 @@ public class teleop extends LinearOpMode{
             rightBackPower  = gamepad1.b ? 1.0 : 0.0;  // B gamepad
             */
             // Send calculated power to wheels
-            map.LeftFront.setPower(leftFrontPower);
+            map.LeftFront.setPower(LeftFrontPower);
             map.RightFront.setPower(RightFrontPower);
             map.LeftBack.setPower(LeftBackPower);
             map.RightBack.setPower(RightBackPower);
@@ -116,8 +112,8 @@ public class teleop extends LinearOpMode{
                 }
             }
             telemetry.update();
-        }
     }
+}
 
 //    @Override
 //    public void init() {
