@@ -1,32 +1,32 @@
 package org.firstinspires.ftc.teamcode;
-        /* Copyright (c) 2022 FIRST. All rights reserved.
-         *
-         * Redistribution and use in source and binary forms, with or without modification,
-         * are permitted (subject to the limitations in the disclaimer below) provided that
-         * the following conditions are met:
-         *
-         * Redistributions of source code must retain the above copyright notice, this list
-         * of conditions and the following disclaimer.
-         *
-         * Redistributions in binary form must reproduce the above copyright notice, this
-         * list of conditions and the following disclaimer in the documentation and/or
-         * other materials provided with the distribution.
-         *
-         * Neither the name of FIRST nor the names of its contributors may be used to endorse or
-         * promote products derived from this software without specific prior written permission.
-         *
-         * NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY THIS
-         * LICENSE. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-         * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
-         * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-         * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
-         * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-         * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-         * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-         * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-         * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-         * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-         */
+/* Copyright (c) 2022 FIRST. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification,
+ * are permitted (subject to the limitations in the disclaimer below) provided that
+ * the following conditions are met:
+ *
+ * Redistributions of source code must retain the above copyright notice, this list
+ * of conditions and the following disclaimer.
+ *
+ * Redistributions in binary form must reproduce the above copyright notice, this
+ * list of conditions and the following disclaimer in the documentation and/or
+ * other materials provided with the distribution.
+ *
+ * Neither the name of FIRST nor the names of its contributors may be used to endorse or
+ * promote products derived from this software without specific prior written permission.
+ *
+ * NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY THIS
+ * LICENSE. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
 
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -65,21 +65,16 @@ public class hardware358 {
     public static DcMotor LeftBack = null;
     public static DcMotor RightBack = null;
 
-//    public static DcMotor lift=null;
+    public static DcMotor intake=null;
+
+    public static DcMotor hang1 = null;
+    public static DcMotor hang2 = null;
     public static CRServo lift_servo1 = null;
     public static CRServo lift_servo2 = null;
 
+    public static Servo tub_servo = null;
+    public static Servo launcher = null;
 
-
-
-    //public static DcMotor lift = null;
-    //public static Servo   clawServo = null;
-
-    //public static DcMotor intake = null;
-
-
-    public static CRServo lift_servo1 = null;
-    public static CRServo lift_servo2 = null;
 
     // Define a constructor that allows the OpMode to pass a reference to itself.
     public hardware358(HardwareMap HardwareMap) {
@@ -99,12 +94,13 @@ public class hardware358 {
         RightFront  = HwMap.get(DcMotor.class, "rf");
         LeftBack  = HwMap.get(DcMotor.class, "lb");
         RightBack  = HwMap.get(DcMotor.class, "rb");
-        lift_servo1  = myOpMode.hardwareMap.get(CRServo.class, "lift_servo1");
-        lift_servo2  = myOpMode.hardwareMap.get(CRServo.class, "lift_servo2");
+
+        hang1 = HwMap.get(DcMotor.class, "hang1");
+        hang1 = HwMap.get(DcMotor.class, "hang2");
+        lift_servo1  = HwMap.get(CRServo.class, "lift_servo1");
+        lift_servo2  = HwMap.get(CRServo.class, "lift_servo2");
 //        clawServo = HwMap.get(Servo.class, "clawServo");
 
-        lift_servo1  = myOpMode.hardwareMap.get(CRServo.class, "lift_servo1");
-        lift_servo2  = myOpMode.hardwareMap.get(CRServo.class, "lift_servo2");
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
         // Pushing the left stick forward MUST make robot go forward. So adjust these two lines based on your first test drive.
@@ -131,8 +127,8 @@ public class hardware358 {
         RightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         RightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        myOpMode.telemetry.addData(">", "Hardware Initialized");
-        myOpMode.telemetry.update();
+//        myOpMode.telemetry.addData(">", "Hardware Initialized");
+//        myOpMode.telemetry.update();
     }
 
 }
