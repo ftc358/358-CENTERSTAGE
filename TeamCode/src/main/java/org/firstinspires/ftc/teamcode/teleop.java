@@ -116,7 +116,7 @@ public class teleop extends LinearOpMode {
         //----------Lift--------------
         //======================================
         double vm = 0.0;
-        hardware358.intake.setPower(vm);
+        //hardware358.intake.setPower(vm);
 
         if (gamepad2.right_stick_y > 0.05) {
             // Check if the right stick is pushed forward or backward
@@ -146,5 +146,29 @@ public class teleop extends LinearOpMode {
             hardware358.launcher.setPosition(0.0);
             telemetry.addData(">", "nothing");
         }
+
+        /////////hanger////////
+        double vm1 = 0.0;
+        if (gamepad2.left_trigger > 0.05 || gamepad2.left_trigger < -0.05) {
+            // Check if the right stick is pushed forward or backward
+            vm1 = -gamepad2.left_trigger;
+            telemetry.addData(">", "hang lifting...");
+
+            // Limit the maximum speed
+            if (vm1 > 0.5)
+            {
+                vm1 = -0.5;
+            }
+
+        } else {
+            // set vm to default to stay up
+            vm1 = -0.01;
+            telemetry.addData(">", "hang staying still");
+        }
+        hardware358.hang1.setPower(vm1);
+        hardware358.hang2.setPower(vm1);
+        telemetry.update();
+
+
     }
 }
