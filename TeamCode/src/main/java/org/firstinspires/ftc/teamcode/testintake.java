@@ -21,18 +21,18 @@ public class testintake extends LinearOpMode {
 
             // IN //
             if (gamepad2.left_stick_y < -0.5) {
-                hardware358.intake.setPower(0.3);
+                intake.setPower(0.3);
                 telemetry.addData(">", "intaking...");
 
             }
             // OUT //
             else if (gamepad2.left_stick_y > 0.5){
-                hardware358.intake.setPower(-0.3);
+                intake.setPower(-0.3);
                 telemetry.addData(">", "spitting out pixels...");
             }
             // at rest //
             else {
-                hardware358.intake.setPower(0);
+                intake.setPower(0);
                 telemetry.addData(">", "not intaking");
 
             }
@@ -41,8 +41,5 @@ public class testintake extends LinearOpMode {
         telemetry.update();
 
         }
-
-
-    }
-
 }
+
