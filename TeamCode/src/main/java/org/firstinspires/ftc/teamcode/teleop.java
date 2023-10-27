@@ -66,7 +66,7 @@ public class teleop extends LinearOpMode {
             map.RightBack.setPower(RightBackPower);
 
 
-////////////////// LIFT ////////////////////
+////////////////// arm servo ////////////////////
 
             // This loop[l runs as long as the OpMode is active
 
@@ -108,67 +108,83 @@ public class teleop extends LinearOpMode {
                 telemetry.addData(">", "not intaking");
 
             }
-        }
-        telemetry.update();
 
-        /////////////////Lift////////////////
-        //======================================
-        //----------Lift--------------
-        //======================================
-        double vm = 0.0;
-        //hardware358.intake.setPower(vm);
+            telemetry.update();
 
-        if (gamepad2.right_stick_y > 0.05) {
-            // Check if the right stick is pushed forward or backward
-            vm = -gamepad2.right_stick_y;
-            telemetry.addData(">", "lifting...");
+            /////////////////Lift////////////////
+            //======================================
+            //----------Lift--------------
+            //======================================
+            double vm = 0.0;
+            boolean firstActivated = false;
 
-            // Limit the maximum speed
-            if (vm > 0.5) {
-                vm = -0.5;
+            if (gamepad2.left_trigger > 0.05) {
+                // Check if the right stick is pushed forward or backward
+
+                telemetry.addData(">", "lifting...");
+                telemetry.addData("power is",-vm);
+            }
+            else if (gamepad2.right_trigger > 0.05) {
+                // Check if the right stick is pushed forward or backward
+                vm = -gamepad2.right_trigger;
+                firstActivated = true;
+                telemetry.addData(">", "unlifting...");
+                long wait =System.currentTimeMillis();
+                while (((System.currentTimeMillis()-wait<5000))){
+                }
+                vm=1.0;
+
+            }else if (firstActivated){
+                vm = 1;
+            }
+            else {
+                // set vm to default to stay up
+                vm = 0.0;
+                telemetry.addData(">", "staying still");
+            }
+            hardware358.hang1.setPower(-vm);
+            hardware358.hang2.setPower(-vm);
+            //hang2.setPower(vm1);
+            telemetry.update();
+
+            ////////////////////////////////////////
+            /////////////DRONE LAUNCHER/////////////
+            ////////////////////////////////////////
+
+            if (gamepad2.right_bumper) {
+                hardware358.launcher.setPosition(1.0);
+                telemetry.addData(">", "launching drone");
+            }
+            else {
+                hardware358.launcher.setPosition(0.0);
+                telemetry.addData(">", "nothing");
             }
 
-        } else {
-            // set vm to default to stay up
-            vm = -0.01;
-            telemetry.addData(">", "staying still");
-        }
+            /////////hanger////////
+            double vm1 = 0.0;
 
-        ////////////////////////////////////////
-        /////////////DRONE LAUNCHER/////////////
-        ////////////////////////////////////////
+            if (gamepad2.left_trigger > 0.05) {
+                // Check if the right stick is pushed forward or backward
+                vm1 = gamepad2.left_trigger;
 
-        if (gamepad2.right_bumper) {
-            hardware358.launcher.setPosition(1.0);
-            telemetry.addData(">", "launching drone");
-        }
-        else {
-            hardware358.launcher.setPosition(0.0);
-            telemetry.addData(">", "nothing");
-        }
-
-        /////////hanger////////
-        double vm1 = 0.0;
-        if (gamepad2.left_trigger > 0.05 || gamepad2.left_trigger < -0.05) {
-            // Check if the right stick is pushed forward or backward
-            vm1 = -gamepad2.left_trigger;
-            telemetry.addData(">", "hang lifting...");
-
-            // Limit the maximum speed
-            if (vm1 > 0.5)
-            {
-                vm1 = -0.5;
+                telemetry.addData(">", "lifting...");
             }
+            else if (gamepad2.right_trigger > 0.05) {
+                // Check if the right stick is pushed forward or backward
+                vm1 = -gamepad2.right_trigger;
+                telemetry.addData(">", "unlifting...");
 
-        } else {
-            // set vm to default to stay up
-            vm1 = -0.01;
-            telemetry.addData(">", "hang staying still");
+            } else {
+                // set vm to default to stay up
+                vm1 = 0.0;
+                telemetry.addData(">", "staying still");
+            }
+            hardware358.hang1.setPower(-vm1);
+            hardware358.hang2.setPower(-vm1);
+            telemetry.update();
         }
-        hardware358.hang1.setPower(vm1);
-        hardware358.hang2.setPower(vm1);
-        telemetry.update();
+
 
 
     }
-}
+    }

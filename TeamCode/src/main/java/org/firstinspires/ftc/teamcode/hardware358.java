@@ -67,6 +67,8 @@ public class hardware358 {
     public static DcMotor hang1 = null;
     public static DcMotor hang2 = null;
 
+    public static DcMotor lift = null;
+
     public static DcMotor intake=null;
     public static CRServo lift_servo1 = null;
     public static CRServo lift_servo2 = null;
@@ -99,6 +101,10 @@ public class hardware358 {
         lift_servo2  = HwMap.get(CRServo.class, "lift_servo2");
         hang1= HwMap.get(DcMotor.class, "hang1");
         hang2= HwMap.get(DcMotor.class, "hang2");
+        lift= HwMap.get(DcMotor.class, "lift");
+        intake= HwMap.get(DcMotor.class, "intake");
+        tub_servo=HwMap.get(Servo.class, "tub_servo");
+        launcher=HwMap.get(Servo.class, "launcher");
 
 //        clawServo = HwMap.get(Servo.class, "clawServo");
 
@@ -115,6 +121,10 @@ public class hardware358 {
         LeftBack.setPower(0);
         RightFront.setPower(0);
         RightBack.setPower(0);
+        hang1.setPower(0);
+        hang2.setPower(0);
+        lift.setPower(0);
+
 
         // If there are encoders connected, switch to RUN_USING_ENCODER mode for greater accuracy
         // leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);

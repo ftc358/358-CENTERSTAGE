@@ -21,13 +21,13 @@ public class testintake extends LinearOpMode {
 
             // IN //
             if (gamepad2.left_stick_y < -0.5) {
-                intake.setPower(0.3);
+                intake.setPower(1);
                 telemetry.addData(">", "intaking...");
 
             }
             // OUT //
             else if (gamepad2.left_stick_y > 0.5){
-                intake.setPower(-0.3);
+                intake.setPower(-1);
                 telemetry.addData(">", "spitting out pixels...");
             }
             // at rest //

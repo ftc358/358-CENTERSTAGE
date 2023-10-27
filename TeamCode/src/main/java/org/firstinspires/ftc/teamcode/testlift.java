@@ -15,6 +15,7 @@ public class testlift extends LinearOpMode {
     public void runOpMode() {
         waitForStart();
         lift = hardwareMap.get(DcMotor.class, "lift");
+        lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         while (opModeIsActive()) {
             double vm = 0.0;
@@ -24,14 +25,14 @@ public class testlift extends LinearOpMode {
                 telemetry.addData(">", "lifting...");
 
                 // Limit the maximum speed
-                if (vm > 0.5)
-                {
-                    vm = -0.5;
-                }
+//                if (vm > 0.5)
+//                {
+//                    vm = -0.5;
+//                }
 
             } else {
                 // set vm to default to stay up
-                vm = -0.05;
+                vm = -0.01;
                 telemetry.addData(">", "staying still");
             }
             lift.setPower(vm);
