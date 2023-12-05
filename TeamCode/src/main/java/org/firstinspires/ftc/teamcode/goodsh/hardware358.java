@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.goodsh;
 /* Copyright (c) 2022 FIRST. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -70,13 +70,15 @@ public class hardware358 {
     public static DcMotor lift = null;
 
     public static DcMotor intake=null;
-    public static CRServo lift_servo1 = null;
-    public static CRServo lift_servo2 = null;
+    public static Servo out1 = null;
+    public static Servo out2 = null;
 
-    public static Servo tub_servo = null;
+//    public static Servo tub_servo = null;
     public static Servo launcher = null;
 
+    public static Servo rotate = null;
 
+    public static CRServo release = null;
 
 
     // Define a constructor that allows the OpMode to pass a reference to itself.
@@ -97,15 +99,18 @@ public class hardware358 {
         RightFront  = HwMap.get(DcMotor.class, "rf");
         LeftBack  = HwMap.get(DcMotor.class, "lb");
         RightBack  = HwMap.get(DcMotor.class, "rb");
-        lift_servo1  = HwMap.get(CRServo.class, "lift_servo1");
-        lift_servo2  = HwMap.get(CRServo.class, "lift_servo2");
+        out1  = HwMap.get(Servo.class, "out1");
+        out2  = HwMap.get(Servo.class, "out2");
         hang1= HwMap.get(DcMotor.class, "hang1");
         hang2= HwMap.get(DcMotor.class, "hang2");
         lift= HwMap.get(DcMotor.class, "lift");
         intake= HwMap.get(DcMotor.class, "intake");
-        tub_servo=HwMap.get(Servo.class, "tub_servo");
+//        tub_servo=HwMap.get(Servo.class, "tub_servo");
         launcher=HwMap.get(Servo.class, "launcher");
+        rotate = HwMap.get(Servo.class, "rotate");
 
+
+        release = HwMap.get(CRServo.class, "release");
 //        clawServo = HwMap.get(Servo.class, "clawServo");
 
 
@@ -115,7 +120,7 @@ public class hardware358 {
         LeftFront.setDirection(DcMotor.Direction.REVERSE);
         LeftBack.setDirection(DcMotor.Direction.REVERSE);
         RightFront.setDirection(DcMotor.Direction.FORWARD);
-        RightBack.setDirection(DcMotor.Direction.FORWARD);
+        RightBack.setDirection(DcMotor.Direction.REVERSE);
 
         LeftFront.setPower(0);
         LeftBack.setPower(0);
